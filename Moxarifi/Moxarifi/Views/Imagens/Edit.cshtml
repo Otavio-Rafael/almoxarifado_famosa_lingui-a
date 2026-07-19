@@ -1,0 +1,44 @@
+﻿@model Moxarifi.Models.Imagem
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Imagem</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Caminho" class="control-label"></label>
+                <input asp-for="Caminho" class="form-control" />
+                <span asp-validation-for="Caminho" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nomearquivo" class="control-label"></label>
+                <input asp-for="Nomearquivo" class="form-control" />
+                <span asp-validation-for="Nomearquivo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoRefId" class="control-label"></label>
+                <select asp-for="ProdutoRefId" class="form-control" asp-items="ViewBag.ProdutoRefId"></select>
+                <span asp-validation-for="ProdutoRefId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

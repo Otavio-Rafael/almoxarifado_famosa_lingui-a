@@ -1,0 +1,45 @@
+﻿@model Almoxarifado.Models.Classificacao
+
+@{
+    ViewData["Title"] = "Nova Classificação";
+}
+
+<div class="d-flex align-items-center mb-4">
+    <h1 class="me-3">Nova Classificação</h1>
+    <a asp-action="Index" class="btn btn-outline-secondary btn-sm">← Voltar</a>
+</div>
+
+<div class="card" style="max-width: 600px;">
+    <div class="card-header">
+        <h5 class="mb-0">Cadastrar Classificação de Produto</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Classifi" class="form-label fw-semibold"></label>
+                <input asp-for="Classifi" class="form-control" placeholder="Ex: Ferramentas" />
+                <span asp-validation-for="Classifi" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Descricacao" class="form-label fw-semibold"></label>
+                <textarea asp-for="Descricacao" class="form-control" rows="3"
+                          placeholder="Descreva a classificação..."></textarea>
+                <span asp-validation-for="Descricacao" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

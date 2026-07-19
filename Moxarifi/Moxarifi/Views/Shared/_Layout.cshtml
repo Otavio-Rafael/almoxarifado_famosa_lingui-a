@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Moxarifi</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5/dist/darkly/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Moxarifi.styles.css" asp-append-version="true" />
+    <style>
+            body {
+                display: flex;
+                min-height: 100vh;
+                flex-direction: column;
+            }
+
+            .wrapper {
+                display: flex;
+                flex: 1;
+            }
+
+            /* SIDEBAR */
+            #sidebar {
+                width: 260px;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: 0;
+                overflow-y: auto;
+                background-color: #1a1a2e;
+                padding: 0;
+                flex-shrink: 0;
+            }
+                
+            }
+
+            .sidebar-brand {
+                padding: 24px 20px;
+                border-bottom: 1px solid #2d2d4e;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .sidebar-brand .logo-box {
+                width: 42px;
+                height: 42px;
+                background: linear-gradient(135deg, #375a7f, #00bc8c);
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                font-size: 18px;
+                color: white;
+            }
+
+            .sidebar-brand span {
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: #fff;
+                letter-spacing: 1px;
+            }
+
+            .sidebar-section {
+                padding: 16px 12px 4px 12px;
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                color: #6c757d;
+            }
+
+            #sidebar .nav-link {
+                color: #adb5bd;
+                padding: 10px 20px;
+                border-radius: 8px;
+                margin: 2px 8px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 0.92rem;
+                transition: all 0.2s;
+            }
+
+            #sidebar .nav-link:hover,
+            #sidebar .nav-link.active {
+                background-color: #375a7f;
+                color: #fff;
+            }
+
+            #sidebar .nav-link i {
+                font-size: 1rem;
+                width: 20px;
+            }
+
+            /* CONTEÚDO PRINCIPAL */
+            #content {
+                margin-left: 260px;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                background-color: #222;
+            }
+
+            #topbar {
+                background-color: #1a1a2e;
+                padding: 12px 24px;
+                border-bottom: 1px solid #2d2d4e;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            #topbar .page-title {
+                color: #fff;
+                font-size: 1rem;
+                margin: 0;
+            }
+
+            .main-content {
+                padding: 28px;
+                flex: 1;
+            }
+
+            footer {
+                background-color: #1a1a2e;
+                color: #6c757d;
+                text-align: center;
+                padding: 12px;
+                font-size: 0.85rem;
+                border-top: 1px solid #2d2d4e;
+            }
+
+            footer a {
+                color: #00bc8c;
+            }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+
+        <!-- SIDEBAR -->
+        <nav id="sidebar">
+            <div class="sidebar-brand" style="padding: 16px 12px;">
+                <a asp-controller="Home" asp-action="Index">
+                    <img src="~/Imagens/Logo.png" alt="Famosa Linguiça" style="width: 100%; max-width: 200px; object-fit: contain;" />
+                </a>
+            </div>
+
+            <div class="sidebar-section">Cadastros</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Produtos" asp-action="Index">
+                        <i class="bi bi-box-seam"></i> Produtos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Classificacoes" asp-action="Index">
+                        <i class="bi bi-tags"></i> Classificações
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Estoques" asp-action="Index">
+                        <i class="bi bi-building"></i> Setores
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Imagens" asp-action="Index">
+                        <i class="bi bi-image"></i> Imagens
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-section">Estoque</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="MovimentacaoEstoques" asp-action="Index">
+                        <i class="bi bi-arrow-left-right"></i> Movimentações
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- CONTEÚDO -->
+        <div id="content">
+            <div id="topbar">
+                <p class="page-title">@ViewData["Title"]</p>
+                <small class="text-muted">Sistema de Almoxarifado</small>
+            </div>
+
+            <div class="main-content">
+                @RenderBody()
+            </div>
+
+            <footer>
+                &copy; 2026 Moxarifi &nbsp;|&nbsp;
+                <a asp-controller="Home" asp-action="Privacy">Privacidade</a>
+            </footer>
+        </div>
+
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

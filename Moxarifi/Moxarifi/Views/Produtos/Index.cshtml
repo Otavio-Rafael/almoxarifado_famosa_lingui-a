@@ -1,0 +1,66 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<Almoxarifado.Models.Produto>
+
+@{
+    ViewData["Title"] = "Produtos";
+}
+
+<h1>Produtos armazenados</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Cadastrar Novo Produto</a>
+</p>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Imagem</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Nome)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Descricao)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Quantidade)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Classificacao)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Estoque)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @{
+                    string arquivo = "";
+                    if (item.ListaImagem.Count > 0)
+                    {
+                        arquivo = $"{item.ListaImagem.FirstOrDefault().Caminho}/{item.ListaImagem.FirstOrDefault().Nomearquivo}";
+                    }
+                }
+                <td><img src="@arquivo" width="150" /></td>
+                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                <td>@Html.DisplayFor(modelItem => item.Quantidade)</td>
+                <td>@Html.DisplayFor(modelItem => item.Classificacao.Classifi)</td>
+                <td>@Html.DisplayFor(modelItem => item.Estoque.Nome)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Deletar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Paginação -->
+<div class="d-flex justify-content-between align-items-center mt-3">
+    <small class="text-muted">
+        Página @Model.PageNumber de @Model.PageCount — @Model.TotalItemCount produto(s) no total
+    </small>
+    @Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina }),
+        new PagedListRenderOptions
+        {
+            LiElementClasses = new[] { "page-item" },
+            PageClasses = new[] { "page-link" },
+            UlElementClasses = new[] { "pagination" }
+        })
+</div>

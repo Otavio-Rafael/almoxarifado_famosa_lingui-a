@@ -1,0 +1,38 @@
+﻿@model Moxarifi.Models.Estoque
+
+@{
+    ViewData["Title"] = "Novo Local de Armazenamento";
+}
+
+<div class="d-flex align-items-center mb-4">
+    <h1 class="me-3">Novo Local de Armazenamento</h1>
+    <a asp-action="Index" class="btn btn-outline-secondary btn-sm">← Voltar</a>
+</div>
+
+<div class="card" style="max-width: 600px;">
+    <div class="card-header">
+        <h5 class="mb-0">Cadastrar Setor</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Nome" class="form-label fw-semibold"></label>
+                <input asp-for="Nome" class="form-control" placeholder="Ex: Almoxarifado Central" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

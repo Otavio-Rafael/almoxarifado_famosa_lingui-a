@@ -1,0 +1,61 @@
+﻿@model Moxarifi.Models.MovimentacaoEstoque
+
+@{
+    ViewData["Title"] = "Nova Movimentação";
+}
+
+<div class="d-flex align-items-center mb-4">
+    <h1 class="me-3">Nova Movimentação</h1>
+    <a asp-action="Index" class="btn btn-outline-secondary btn-sm">← Voltar</a>
+</div>
+
+<div class="card" style="max-width: 600px;">
+    <div class="card-header">
+        <h5 class="mb-0">Registrar Movimentação de Estoque</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="ProdutoId" class="form-label fw-semibold"></label>
+                <select asp-for="ProdutoId" class="form-select" asp-items="ViewBag.ProdutoId">
+                    <option value="">-- Selecione um produto --</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Quantidade" class="form-label fw-semibold"></label>
+                <input asp-for="Quantidade" class="form-control" min="1" />
+                <span asp-validation-for="Quantidade" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="TipoMovi" class="form-label fw-semibold"></label>
+                <select asp-for="TipoMovi"
+                        asp-items="Html.GetEnumSelectList<Moxarifi.Models.TipoMovimentacao>()"
+                        class="form-select">
+                    <option value="">-- Selecione --</option>
+                </select>
+                <span asp-validation-for="TipoMovi" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Data" class="form-label fw-semibold"></label>
+                <input asp-for="Data" class="form-control" type="date" />
+                <span asp-validation-for="Data" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

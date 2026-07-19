@@ -1,0 +1,21 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+
+# Arquivos de usuário/config local
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build
+[Bb]in/
+[Oo]bj/
+
+# Logs
+*.log
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
